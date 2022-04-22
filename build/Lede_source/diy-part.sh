@@ -23,12 +23,12 @@ uci set system.@system[0].hostname='OpenWrt'              # 修改主机名称�
 uci set ttyd.@ttyd[0].command='/bin/login -f root'           # 设置ttyd免帐号登录（去掉uci前面的#生效）
 
 # 如果有用IPV6的话,可以使用以下命令创建IPV6客户端(LAN口)（去掉全部代码uci前面#号生效）
-uci set network.ipv6=interface
-uci set network.ipv6.proto='dhcpv6'
-uci set network.ipv6.ifname='@lan'
-uci set network.ipv6.reqaddress='try'
-uci set network.ipv6.reqprefix='auto'
-uci set firewall.@zone[0].network='lan ipv6'
+#uci set network.ipv6=interface
+#uci set network.ipv6.proto='dhcpv6'
+#uci set network.ipv6.ifname='@lan'
+#uci set network.ipv6.reqaddress='try'
+#uci set network.ipv6.reqprefix='auto'
+#uci set firewall.@zone[0].network='lan ipv6'
 EOF
 
 
@@ -37,7 +37,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 
 
 # 编译多主题时,设置某主题成默认主题（您要确定您这里改的主题的名字准确,比如下面代码的[argon]和肯定编译了该主题,要不然进不了后台）
-#sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/argon' && uci commit luci" "$FIN_PATH"
+sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/argon' && uci commit luci" "$FIN_PATH"
 
 
 # 增加个性名字 ${Author} 默认为你的github帐号,修改时候把 ${Author} 替换成你要的
