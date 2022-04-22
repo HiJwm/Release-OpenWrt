@@ -56,16 +56,13 @@ sed -i '/to-ports 53/d' "$ZZZ_PATH"
 sed -i "/exit 0/i\sed -i '/coremark/d' /etc/crontabs/root" "$FIN_PATH"
 
 
-# x86机型,默认内核5.15，修改内核为5.10（源码时时变,自行根据target/linux/x86/Makefile文件修改）
-#sed -i 's/PATCHVER:=5.15/PATCHVER:=5.10/g' target/linux/x86/Makefile
+# 设置打包固件的机型，内核组合（可用内核是时时变化的,过老的内核就删除的，所以要选择什么内核请看说明）
+# 当前可用机型 a311d, s922x, s905x3, s905x2, s905l3a, s912, s905d, s905x, s905w, s905
 
-
-# K3专用，编译K3的时候只会出K3固件（其他机型也适宜,把phicomm_k3和对应路径替换一下，名字要绝对正确才行）
-#sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' target/linux/bcm53xx/image/Makefile
-
-
-# 在线更新时，删除不想保留固件的某个文件，在EOF跟EOF之间加入删除代码，记住这里对应的是固件的文件路径，比如： rm -rf /etc/config/luci
-cat >$DELETE <<-EOF
+cat >$GITHUB_WORKSPACE/amlogic_openwrt <<-EOF
+amlogic_model=s905x3_s905x2_s905x_s905w_s905d_s922x_s912
+amlogic_kernel=5.10.100_5.4.180 -a true
+rootfs_size=960
 EOF
 
 
@@ -82,14 +79,11 @@ sed -i 's/"管理权"/"改密码"/g' `grep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `grep "带宽监控" -rl ./`
 
 
-# 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间（根据编译机型变化,自行调整需要删除的固件名称）
+# 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间
 cat >${GITHUB_WORKSPACE}/Clear <<-EOF
 rm -rf packages
 rm -rf config.buildinfo
 rm -rf feeds.buildinfo
-rm -rf openwrt-x86-64-generic-kernel.bin
-rm -rf openwrt-x86-64-generic.manifest
-rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
 rm -rf sha256sums
 rm -rf version.buildinfo
 EOF
