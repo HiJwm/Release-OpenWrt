@@ -50,7 +50,7 @@ mv package/lucimod/* feeds/luci/modules/luci-base/htdocs/luci-static/resources/i
 
 #删除danshui iStore应用
 rm -rf ./feeds/danshui/luci-app-store
-添加K大istore应用
+#添加K大istore应用
 svn co https://github.com//kenzok8/openwrt-packages/trunk/luci-app-store ./package/luci-app-store
 
 
