@@ -35,6 +35,24 @@ EOF
 # 设置 argon 为编译必选主题(可自行修改您要的,主题名称必须对,源码内必须有该主题)
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
+删除lede自带argon主题
+rm -rf ./feeds/luci/themes/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git ./package/luci-theme-argon
+git clone https://github.com/jerrykuku/luci-app-argon-config.git ./package/luci-app-argon-config
+#删除danshui argon主题
+rm -rf ./feeds/danshui/luci-theme-argon
+rm -rf ./feeds/danshui/luci-app-argon-config
+
+# Change default BackGround img
+wget -O ./package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg https://github.com/jiawm/My-OpenWrt/raw/main/BackGround/2.jpg
+svn co https://github.com/xylz0928/luci-mod/trunk/feeds/luci/modules/luci-base/htdocs/luci-static/resources/icons ./package/lucimod
+mv package/lucimod/* feeds/luci/modules/luci-base/htdocs/luci-static/resources/icons/
+
+#删除danshui iStore应用
+rm -rf ./feeds/danshui/luci-app-store
+添加K大istore应用
+svn co https://github.com//kenzok8/openwrt-packages/trunk/luci-app-store ./package/luci-app-store
+
 
 # 编译多主题时,设置某主题成默认主题（您要确定您这里改的主题的名字准确,比如下面代码的[argon]和肯定编译了该主题,要不然进不了后台）
 sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/argon' && uci commit luci" "$FIN_PATH"
