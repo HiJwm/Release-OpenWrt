@@ -97,9 +97,9 @@ sed -i 's/"KMS 服务器"/"KMS激活"/g' `grep "KMS 服务器" -rl ./`
 sed -i 's/"TTYD 终端"/"命令窗"/g' `grep "TTYD 终端" -rl ./`
 sed -i 's/"USB 打印服务器"/"打印服务"/g' `grep "USB 打印服务器" -rl ./`
 #sed -i 's/"Web 管理"/"Web"/g' `grep "Web 管理" -rl ./`
-sed -i 's/"管理权"/"改密码"/g' `grep "管理权" -rl ./`
+sed -i 's/"管理权"/"修改密钥"/g' `grep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `grep "带宽监控" -rl ./`
-sed -i 's/"商店"/"iStore"/g' `grep "商店" -rl ./`
+
 
 #添加kenzok8插件包
 #sed -i '$a src-git smpackage https://github.com/kenzok8/openwrt-packages' feeds.conf.default
