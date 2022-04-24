@@ -115,4 +115,5 @@ rm -rf openwrt-x86-64-generic.manifest
 rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
 rm -rf sha256sums
 rm -rf version.buildinfo
+rm -rf ipk.tar.gz
 EOF
