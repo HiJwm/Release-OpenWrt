@@ -13,14 +13,14 @@ cat >$NETIP <<-EOF
 uci set network.lan.ipaddr='192.168.2.1'                      # IPv4 地址(openwrt后台地址)
 uci set network.lan.netmask='255.255.255.0'                   # IPv4 子网掩码
 #uci set network.lan.gateway='192.168.2.1'                     # IPv4 网关
-uci set network.lan.broadcast='192.168.2.255'                 # IPv4 广播
-uci set network.lan.dns='223.5.5.5 114.114.114.114'           # DNS(多个DNS要用空格分开)
+#uci set network.lan.broadcast='192.168.2.255'                 # IPv4 广播
+#uci set network.lan.dns='223.5.5.5 114.114.114.114'           # DNS(多个DNS要用空格分开)
 uci set network.lan.delegate='1'                              # 去掉LAN口使用内置的 IPv6 管理(若用IPV6请把'0'改'1')
 uci set dhcp.@dnsmasq[0].filter_aaaa='0'                      # 禁止解析 IPv6 DNS记录(若用IPV6请把'1'改'0')
 
 #uci set dhcp.lan.ignore='1'                                  # 关闭DHCP功能（去掉uci前面的#生效）
 uci set system.@system[0].hostname='OpenWrt'              # 修改主机名称为OpenWrt-123
-uci set ttyd.@ttyd[0].command='/bin/login -f root'           # 设置ttyd免帐号登录（去掉uci前面的#生效）
+#uci set ttyd.@ttyd[0].command='/bin/login -f root'           # 设置ttyd免帐号登录（去掉uci前面的#生效）
 
 # 如果有用IPV6的话,可以使用以下命令创建IPV6客户端(LAN口)（去掉全部代码uci前面#号生效）
 #uci set network.ipv6=interface
@@ -36,19 +36,19 @@ EOF
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 #删除lede自带argon主题
-rm -rf ./feeds/luci/themes/luci-theme-argon
+#rm -rf ./feeds/luci/themes/luci-theme-argon
 
 #删除danshui argon主题
-rm -rf ./feeds/danshui/luci-theme-argon
-rm -rf ./feeds/danshui/luci-app-argon-config
+#rm -rf ./feeds/danshui/luci-theme-argon
+#rm -rf ./feeds/danshui/luci-app-argon-config
 
 #clone jerrykuku themes
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git ./package/luci-theme-argon
-git clone https://github.com/jerrykuku/luci-app-argon-config.git ./package/luci-app-argon-config
+#git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git ./package/luci-theme-argon
+#git clone https://github.com/jerrykuku/luci-app-argon-config.git ./package/luci-app-argon-config
 
 
 # Change default BackGround img
-#wget -O ./package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg https://github.com/jiawm/My-OpenWrt/raw/main/BackGround/2.jpg
+wget -O ./danshui/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg https://github.com/jiawm/My-OpenWrt/raw/main/BackGround/2.jpg
 
 #Change default icon img
 svn co https://github.com/xylz0928/luci-mod/trunk/feeds/luci/modules/luci-base/htdocs/luci-static/resources/icons ./package/lucimod
@@ -115,4 +115,5 @@ rm -rf openwrt-x86-64-generic.manifest
 rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
 rm -rf sha256sums
 rm -rf version.buildinfo
+rm -rf ipk.tar.gz
 EOF
