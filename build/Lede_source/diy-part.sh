@@ -108,7 +108,8 @@ sed -i 's/"带宽监控"/"监控"/g' `egrep "带宽监控" -rl ./`
 #添加kenzok8插件包
 #sed -i '$a src-git smpackage https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 
-sed -i 's/PKG_HASH.*/PKG_HASH:=skip/' feeds/packages/utils/containerd/Makefile
+#已修复，下面代码用不着
+#sed -i 's/PKG_HASH.*/PKG_HASH:=skip/' feeds/packages/utils/containerd/Makefile
 
 # 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间（根据编译机型变化,自行调整需要删除的固件名称）
 cat >${GITHUB_WORKSPACE}/Clear <<-EOF
