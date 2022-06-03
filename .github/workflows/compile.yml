@@ -198,6 +198,16 @@ jobs:
         overwrite: true
         file_glob: true
 
+    - name: Upload Aliyun
+      continue-on-error: true
+      run: |  
+        cd openwrt/bin/Firmware
+        echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
+        jar cf $(date +%Y%m%d)-OpenWrt-X86.zip *
+        cd ..        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "ReleaseOpenWrt " --file "openwrt/bin/Firmware/$(date +%Y%m%d)-OpenWrt-X86.zip"  
+    
+    
     - name: 电报机器人或pushplus信息通知
       continue-on-error: true
       if: env.PUSH_PLUS_TOKEN && env.SERVERCHAN_SCKEY == 'PUSH' || env.TELEGRAM_BOT_TOKEN && env.SERVERCHAN_SCKEY == 'TG'
