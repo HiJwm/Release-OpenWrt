@@ -205,7 +205,7 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf OpenWrt-X86-${{ env.Firmware_Date }}.zip *
         cd ..        
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "ReleaseOpenWrt " --file "openwrt/bin/Firmware/OpenWrt-X86-${{ env.Firmware_Date }}.zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "ReleaseOpenWrt" --file "openwrt/bin/Firmware/OpenWrt-X86-${{ env.Firmware_Date }}.zip"  
     
     
     - name: 电报机器人或pushplus信息通知
