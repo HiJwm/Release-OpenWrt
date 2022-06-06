@@ -201,7 +201,7 @@ jobs:
     - name: Upload Aliyun
       continue-on-error: true
       run: |  
-        cd /home/runner/work/Release-OpenWrt/Release-OpenWrt/openwrt/bin/targets/x86/64
+        cd openwrt/bin/Firmware/*
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf OpenWrt-X86.zip *
         cd ..        
