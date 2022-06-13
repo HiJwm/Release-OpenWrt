@@ -16,7 +16,7 @@ on:
     branches:
       - main
     paths:
-      - 'build/Lede_source/start-up/start'
+      - '-config-'
 
 env:
   Github: https://github.com/${{github.repository}}
@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lede_source]
+        target: [Lienol_source]
         
         # [Lede_source,Lienol_source,Mortal_source,Tianling_source,openwrt_amlogic]
 
@@ -62,7 +62,12 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         source $GITHUB_WORKSPACE/build/${{matrix.target}}/common.sh && Diy_update
-        
+    
+    - name: 下载"${{matrix.target}}"源码
+      working-directory: /${{matrix.target}}
+      run: |
+        git clone -b "$REPO_BRANCH" --single-branch "$REPO_URL" openwrt
+        ln -sf /${{matrix.target}}/openwrt $GITHUB_WORKSPACE/openwrt
     
     - name: 公 告
       run: |
@@ -193,7 +198,6 @@ jobs:
         overwrite: true
         file_glob: true
 
-    
     - name: 电报机器人或pushplus信息通知
       continue-on-error: true
       if: env.PUSH_PLUS_TOKEN && env.SERVERCHAN_SCKEY == 'PUSH' || env.TELEGRAM_BOT_TOKEN && env.SERVERCHAN_SCKEY == 'TG'
