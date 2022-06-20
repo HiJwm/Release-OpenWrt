@@ -104,7 +104,7 @@ sed -i 's/"Web 管理"/"Web管理"/g' `egrep "Web 管理" -rl ./`
 sed -i 's/"管理权"/"改密码"/g' `egrep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `egrep "带宽监控" -rl ./`
 
-sed -i "git ipkg https://github.com/xiangfeidexiaohuo/op-ipkg\n" feeds.conf.default
+sed -i '$a src-git ipkg https://github.com/xiangfeidexiaohuo/op-ipkg\n' feeds.conf.default
 
 #添加kenzok8插件包
 #sed -i '$a src-git smpackage https://github.com/kenzok8/openwrt-packages' feeds.conf.default
